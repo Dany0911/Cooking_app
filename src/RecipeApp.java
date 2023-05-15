@@ -223,22 +223,34 @@ public class RecipeApp {
 
     public static void typeCookingTime() {
         System.out.println("Please enter the max cooking time in minutes:");
-        int time = Integer.valueOf(scanner.nextLine());
-        boolean found = false;
-        for (Recipe recipe : recipes) {
-            if (Integer.parseInt(recipe.getTime()) <= time) {
-                System.out.println(recipe);
-                found = true;
+        for (;;) {
+            if (!scanner.hasNextInt()) {
+                System.out.println("Enter only integers!: ");
+                scanner.next(); // discard
+                continue;
             }
 
+            else {
+                int time = scanner.nextInt();
+                boolean found = false;
+                for (Recipe recipe : recipes) {
+                    if (Integer.parseInt(recipe.getTime()) <= time) {
+                        System.out.println(recipe);
+                        found = true;
+                    }
+
+                }
+
+                if (!found) {
+                    System.out
+                            .println("No recipes found with cooking time less than or equal to " + time + " minutes.");
+
+                }
+                break;
+            }
         }
-
-        if (!found) {
-            System.out.println("No recipes found with cooking time less than or equal to " + time + " minutes.");
-
-        }
-
     }
+
 
     // Print a list of recipies containing an Ingredient entered by the user.
 
