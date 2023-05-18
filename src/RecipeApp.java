@@ -75,17 +75,17 @@ public class RecipeApp {
         System.out.println("Goodbye!");
     }
     
-// Add a recipe asking to the user name, ingredients, description, time and type.
+// Add a recipe asking to the user name, ingredients, description, time and type. All input are edited in lowercase.
     
     public static void addRecipe() {
         System.out.println("Add recipe name:");
-        String name = scanner.nextLine();
+        String name = scanner.nextLine().toLowerCase();
 
         System.out.println("Please enter the recipe description:");
-        String ingredients = scanner.nextLine();
+        String ingredients = scanner.nextLine().toLowerCase();
 
         System.out.println("Please enter the recipe ingredients:");
-        String description = scanner.nextLine();
+        String description = scanner.nextLine().toLowerCase();
 
         System.out.println("Please enter the recipe cooking time in minutes:");
         // If the user doesn't enter an integer give the message to enter only integers until he does. and then convert the int to string.
@@ -100,7 +100,7 @@ public class RecipeApp {
                 scanner.nextLine();
 
         System.out.println("Please enter the recipe type(Vegan, vegetarian...):");
-        String type = scanner.nextLine();
+        String type = scanner.nextLine().toLowerCase();
 
         Recipe recipe = new Recipe(name, ingredients, description, time, type);
         recipes.add(recipe);
@@ -116,9 +116,9 @@ public class RecipeApp {
         System.out.println("Please enter the recipe name:");
         recipeNames();
         System.out.println();
-        String name = scanner.nextLine();
+        String name = scanner.nextLine().toLowerCase();
         System.out.println();
-// Go through the list and check if there is a match with the name (Case sensitive)
+// Go through the list and check if there is a match with the name
         // If there is, show the recipe, otherwise give message ".. not found"
         for (Recipe recipe : recipes) {
             if (recipe.getName().contains(name)) {
@@ -142,13 +142,11 @@ public class RecipeApp {
         pausePrint();
     }
 
-    // Remove a recipe from the list. The name entered must be equal to the name on
-    // the list (Case sensitive)
-
+    // Remove a recipe from the list.
     public static void removeRecipe() {
         System.out.println("Please enter the recipe name to be removed:");
         recipeNames();
-        String name = scanner.nextLine();
+        String name = scanner.nextLine().toLowerCase();
     
         Iterator<Recipe> iterator = recipes.iterator();
         boolean removed = false;
@@ -194,7 +192,7 @@ public class RecipeApp {
         }
     }
 
-    // Load all recipies from a file to memory
+    // Load all recipes from a file to memory
 
     public static void loadRecipesFromFile() {
         try (Scanner fileScanner = new Scanner(new File("recipes.txt"))) {
@@ -211,7 +209,7 @@ public class RecipeApp {
         }
     }
 
-    // Print a list of recipies that can be cooked in n minutes or less, where n is
+    // Print a list of recipes that can be cooked in n minutes or less, where n is
     // chosen by the user.
 
     public static void typeCookingTime() {
@@ -245,14 +243,14 @@ public class RecipeApp {
         }
     }
 
-    // Print a list of recipies containing an Ingredient entered by the user.
+    // Print a list of recipes containing an Ingredient entered by the user.
 
     public static void typeIngredients() {
        System.out.println("Please enter an ingredient:");
-        String ingredient = scanner.nextLine();
+        String ingredient = scanner.nextLine().toLowerCase();
         Boolean found = false;
 
-    // Go through the list and check if there is a match with the ingredients (Case sensitive)
+    // Go through the list and check if there is a match with the ingredients
     // If there is a match, shows the recipes.
         for (Recipe recipe : recipes) {
             if (recipe.getIngredients().contains(ingredient)) {
@@ -273,7 +271,7 @@ public class RecipeApp {
 
     public static void typeType() {
         System.out.println("Please enter a recipe type (eg. Vegan, Vegetarian...):");
-        String type = scanner.nextLine();
+        String type = scanner.nextLine().toLowerCase();
 
         boolean found = false;
         // Go through the list and check if there is a match with the type (Case sensitive)
